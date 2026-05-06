@@ -1,0 +1,40 @@
+{
+  "num_rows": 200,
+  "train_rows": 160,
+  "test_rows": 40,
+  "task_family": {
+    "preference_mcq": 40,
+    "preference_yesno": 80,
+    "recognition_mcq": 30,
+    "recognition_yesno": 50
+  },
+  "category_l2": {
+    "preference / awareness": 47,
+    "preference / inconsistency": 40,
+    "preference / overconcept": 33,
+    "recognition / awareness": 26,
+    "recognition / inconsistency": 30,
+    "recognition / overconcept": 24
+  },
+  "preference_concepts": {
+    "entertainment": 24,
+    "fashion": 24,
+    "lifestyle": 25,
+    "shopping": 24,
+    "travel": 23
+  },
+  "answers": {
+    "0": 17,
+    "1": 20,
+    "2": 17,
+    "3": 16,
+    "4": 58,
+    "5": 72
+  },
+  "num_images": 1194,
+  "max_image_bytes": 265949,
+  "image_max_side": 336,
+  "selection_seed": 20260506,
+  "image_format": "png",
+  "total_image_bytes": 140370180
+}

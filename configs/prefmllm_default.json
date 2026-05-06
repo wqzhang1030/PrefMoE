@@ -1,0 +1,59 @@
+{
+  "method": "PrefMLLM",
+  "paper_terms": {
+    "factorized_user_state": "llava.model.prefmllm.FactorizedUserStateMemory",
+    "preference_facets": ["entertainment", "travel", "lifestyle", "shopping", "fashion"],
+    "profile_factors": ["profile_image", "profile_description"],
+    "preference_decomposition": "shared_prototype + personalized_residual",
+    "routing": "factorized_user_aware_hierarchical_moe"
+  },
+  "paths": {
+    "data_path": "./data/mmpb_clean/sample.csv",
+    "data_split_path": "./data/mmpb_clean/split.json",
+    "image_folder": "./data",
+    "pseudo_user_csv": "./data/mmpb_clean/pseudo_users.csv",
+    "model_base": "./checkpoints/vicuna-7b-v1.5",
+    "vision_tower": "./checkpoints/clip-vit-large-patch14-336",
+    "output_dir": "./outputs/prefmllm_hmoe"
+  },
+  "training": {
+    "train_mode": "prefmllm",
+    "module2_arch": "hierarchical_moe_lora",
+    "top_layers": 8,
+    "per_device_train_batch_size": 4,
+    "num_preference_facets": 5,
+    "num_profile_experts": 2,
+    "shared_preference_experts": 5,
+    "counterfactual_user_augmentation": true,
+    "task_router_mode": "query",
+    "task_router_supervision": "none",
+    "preference_router_mode": "learned",
+    "profile_router_mode": "learned",
+    "preference_residual_loss_mode": "density_focal",
+    "loss_weights": {
+      "image_description_consistency": 0.05,
+      "profile_image_contrastive": 0.10,
+      "description_contrastive": 0.10,
+      "preference_factor_contrastive": 0.20,
+      "preference_decorrelation": 0.05,
+      "imbalance_aware_focal": 0.20,
+      "task_router": 0.00,
+      "preference_router": 0.00
+    },
+    "contrastive_temperature": 0.07,
+    "focal_gamma": 2.0,
+    "density_eta": 1.0
+  },
+  "evaluation": {
+    "zero_turn": {
+      "generic_conversation_enable": false,
+      "generic_conversation_n_turn": 0
+    },
+    "ten_turn": {
+      "generic_conversation_enable": true,
+      "generic_conversation_n_turn": 10,
+      "generic_conversation_path": "./data/multi_turn/generic_text/multi_turn_conversation.json"
+    },
+    "collapse_metric": "FPout boundary-external false-positive rate"
+  }
+}

@@ -1,0 +1,6 @@
+pseudo_id,pseudo_name,concept_family,description_text,pref_entertainment,pref_travel,pref_lifestyle,pref_shopping,pref_fashion,uid_seed,image_seed
+0,PseudoEntertainment,entertainment,A virtual user for entertainment counterfactuals,documentary films,quiet travel,reading routines,notebooks,linen jackets,11,101
+1,PseudoTravel,travel,A virtual user for travel counterfactuals,live music,beach trips,outdoor routines,bright accessories,blue jackets,12,102
+2,PseudoLifestyle,lifestyle,A virtual user for lifestyle counterfactuals,podcasts,city walks,quiet cafes,handmade mugs,soft cardigans,13,103
+3,PseudoShopping,shopping,A virtual user for shopping counterfactuals,concert videos,mountain cabins,yoga mornings,small boutiques,earth tone coats,14,104
+4,PseudoFashion,fashion,A virtual user for fashion counterfactuals,cooking shows,train journeys,home gardening,vintage stores,white shirts,15,105
