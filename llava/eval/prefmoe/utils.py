@@ -135,7 +135,7 @@ def get_hit(df: pd.DataFrame) -> pd.DataFrame:
     为样本表增加 `gt_norm/pred_norm/hit` 三列。
     评分细节统一复用 eval_demo.metrics，避免两套规则漂移。
     """
-    from llava.eval.CVLMP.eval_demo.metrics import score_prediction
+    from llava.eval.prefmoe.eval_demo.metrics import score_prediction
 
     out = df.copy()
     if len(out) == 0:
@@ -171,6 +171,6 @@ def report_acc(df: pd.DataFrame) -> pd.DataFrame:
     """
     对齐 MMPB report_acc 口径（split/Overall/分组列）。
     """
-    from llava.eval.CVLMP.eval_demo.metrics import report_acc_mmpb
+    from llava.eval.prefmoe.eval_demo.metrics import report_acc_mmpb
 
     return report_acc_mmpb(df)

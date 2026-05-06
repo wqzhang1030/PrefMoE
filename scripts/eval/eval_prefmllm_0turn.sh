@@ -9,7 +9,7 @@ IMAGE_FOLDER="${IMAGE_FOLDER:-./data}"
 OUTPUT_ROOT="${OUTPUT_ROOT:-./outputs/eval_0turn}"
 PYTHON="${PYTHON:-python3}"
 
-"${PYTHON}" llava/eval/CVLMP/eval_demo/eval_cvlmp_bridge_2.py test \
+"${PYTHON}" llava/eval/prefmoe/eval_demo/eval_prefmoe_bridge_2.py test \
   --model-path "${MODEL_PATH}" \
   --model-base "${MODEL_BASE}" \
   --fold 0 \
@@ -26,7 +26,7 @@ PYTHON="${PYTHON:-python3}"
   --world-size 1 \
   --max-samples -1
 
-"${PYTHON}" llava/eval/CVLMP/eval_demo/eval_cvlmp_bridge_2.py evaluate \
+"${PYTHON}" llava/eval/prefmoe/eval_demo/eval_prefmoe_bridge_2.py evaluate \
   --model-base "${MODEL_BASE}" \
   --fold 0 \
   --model-task 0 \

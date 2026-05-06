@@ -9,7 +9,7 @@ if str(PROJECT_ROOT) not in sys.path:
 
 import pandas as pd
 
-from llava.eval.CVLMP.eval_demo.metrics import evaluate_mmpb_no_gpt, report_acc
+from llava.eval.prefmoe.eval_demo.metrics import evaluate_mmpb_no_gpt, report_acc
 from llava.eval.prefmllm import write_preference_collapse_report
 
 

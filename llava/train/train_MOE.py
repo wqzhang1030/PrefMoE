@@ -46,12 +46,12 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 try:
     from llava.train.dataset import (
         DataArguments,
-        make_supervised_cvlmp_data_module,
+        make_supervised_prefmoe_data_module,
         make_supervised_data_module,
         rank0_print,
     )
 except ImportError:
-    from dataset import make_supervised_data_module, DataArguments, rank0_print, make_supervised_cvlmp_data_module
+    from dataset import make_supervised_data_module, DataArguments, rank0_print, make_supervised_prefmoe_data_module
 
 @dataclass
 class ModelArguments:
@@ -452,7 +452,7 @@ def train():
 
     ########################################################################################
     # data_module = make_supervised_data_module(tokenizer=tokenizer, data_args=data_args)
-    data_module = make_supervised_cvlmp_data_module(tokenizer=tokenizer, data_args=data_args)
+    data_module = make_supervised_prefmoe_data_module(tokenizer=tokenizer, data_args=data_args)
     ########################################################################################
     trainer = LLaVATrainer(model=model, tokenizer=tokenizer, args=training_args, **data_module)
 

@@ -28,9 +28,9 @@ if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
 from llava.constants import IGNORE_INDEX 
-from llava.eval.CVLMP.dataset import build_prompt
-from llava.eval.CVLMP.eval_demo.metrics import evaluate_mmpb_no_gpt, report_acc
-from llava.eval.CVLMP.utils import dump, load
+from llava.eval.prefmoe.dataset import build_prompt
+from llava.eval.prefmoe.eval_demo.metrics import evaluate_mmpb_no_gpt, report_acc
+from llava.eval.prefmoe.utils import dump, load
 from llava.mm_utils import get_model_name_from_path_v2
 from llava.model.builder import load_pretrained_model_v2
 from llava.model.memory import build_fold_train_visible_user_registry, resolve_description_field, concept_to_factor_id
@@ -838,7 +838,7 @@ def load_model_adapter(
 # 3) 对样本字段做“临时裁剪”后再调用原 build_prompt，保证训练逻辑不受影响。
 # 4) 输入是单条样本行，输出是模型可直接推理的 message dict。
 class BridgeDatasetView:
-    """对 `llava.eval.CVLMP.dataset.build_prompt` 的轻量包装。
+    """对 `llava.eval.prefmoe.dataset.build_prompt` 的轻量包装。
 
     参数：
     - data_df: 当前评测子集 DataFrame（通常是某个 eval_task 的 test 集）。
@@ -970,7 +970,7 @@ class BridgeDatasetView:
 # 2) test 阶段执行推理并落盘 rank pkl；evaluate 阶段合并并评分。
 # 3) 封装日志、模型惰性加载、输出文件命名等运行细节。
 # 4) 外部脚本可通过循环调用该类完成下三角矩阵评测。
-class CVLMPBridge2:
+class PrefMoEBridge2:
     """Bridge-2 评测执行器（基线版）。"""
 
     def __init__(self, args, logger, wandb_run=None):
@@ -1350,7 +1350,7 @@ def _load_image_tensor(image_folder: str, rel_path: str, image_processor, image_
 # 1) 复用基线 test/evaluate 逻辑，仅在样本侧注入 name_for_prompt。
 # 2) 落盘 name_replacement_log，便于后续分析替换覆盖与影响。
 # 3) 保持 hit/acc 口径完全不变。
-class CVLMPBridge2NameAblation(CVLMPBridge2):
+class PrefMoEBridge2NameAblation(PrefMoEBridge2):
     """Name 替换实验执行器。"""
 
     def __init__(self, args, logger, wandb_run=None):
@@ -1456,7 +1456,7 @@ class CVLMPBridge2NameAblation(CVLMPBridge2):
 # 1) 复用基线流程，在 test 阶段按计划替换 struct['image']。
 # 2) 支持 no_image / shuffle_image，并记录 donor 来源。
 # 3) 保持评分逻辑不变，仅改变视觉输入。
-class CVLMPBridge2VisionAblation(CVLMPBridge2):
+class PrefMoEBridge2VisionAblation(PrefMoEBridge2):
     """视觉输入消融执行器。"""
 
     def __init__(self, args, logger, wandb_run=None):
@@ -1628,7 +1628,7 @@ class CVLMPBridge2VisionAblation(CVLMPBridge2):
 # 4) 解析失败时 argparse 会直接退出并返回非 0 状态。
 def build_parser():
     """构建命令行参数解析器。"""
-    parser = argparse.ArgumentParser(description='CVLMP Bridge-2 (baseline: role-only eval modes)')
+    parser = argparse.ArgumentParser(description='PrefMoE Bridge-2 (baseline: role-only eval modes)')
     sub = parser.add_subparsers(dest='cmd', required=True)
 
     def add_shared(sp):
@@ -1741,18 +1741,18 @@ def main():
     if name_mode != 'none' and vision_mode != 'none':
         raise ValueError('Only one ablation mode can be enabled at a time: name OR vision.')
 
-    runner_cls = CVLMPBridge2
+    runner_cls = PrefMoEBridge2
     log_prefix = 'bridge2'
     if name_mode != 'none':
         ratio = float(getattr(args, 'name_replace_ratio', 1.0))
         seed = int(getattr(args, 'name_replace_seed', 0))
         args.output_root = augment_output_root(args.output_root, [f'namerepl_{name_mode}_r{ratio:g}_s{seed}'])
-        runner_cls = CVLMPBridge2NameAblation
+        runner_cls = PrefMoEBridge2NameAblation
         log_prefix = 'bridge2_nameabl'
     elif vision_mode != 'none':
         seed = int(getattr(args, 'vision_ablation_seed', 0))
         args.output_root = augment_output_root(args.output_root, [f'visabl_{vision_mode}_s{seed}'])
-        runner_cls = CVLMPBridge2VisionAblation
+        runner_cls = PrefMoEBridge2VisionAblation
         log_prefix = 'bridge2_visabl'
 
     log_name = f'{log_prefix}_fold{args.fold}_mt{args.model_task}_et{args.eval_task}_r{args.rank}w{args.world_size}'

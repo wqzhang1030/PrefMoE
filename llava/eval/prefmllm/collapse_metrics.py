@@ -6,7 +6,7 @@ from typing import Iterable, List, Set, Tuple
 import numpy as np
 import pandas as pd
 
-from llava.eval.CVLMP.eval_demo.metrics import answer_to_text, normalize_yes_no
+from llava.eval.prefmoe.eval_demo.metrics import answer_to_text, normalize_yes_no
 
 
 def _split_user_set(value) -> Set[str]:

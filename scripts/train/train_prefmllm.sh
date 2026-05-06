@@ -13,7 +13,7 @@ NUM_PSEUDO_USERS="${NUM_PSEUDO_USERS:-5}"
 PER_DEVICE_TRAIN_BATCH_SIZE="${PER_DEVICE_TRAIN_BATCH_SIZE:-4}"
 PYTHON="${PYTHON:-python3}"
 
-"${PYTHON}" -m llava.train.train_cvlmp \
+"${PYTHON}" -m llava.train.train_prefmoe \
   --train_mode prefmllm \
   --model_name_or_path "${MODEL_NAME_OR_PATH}" \
   --version vicuna_v1 \

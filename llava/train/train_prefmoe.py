@@ -55,12 +55,12 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 try:
     from llava.train.dataset import (
         DataArguments,
-        make_supervised_cvlmp_data_module,
+        make_supervised_prefmoe_data_module,
         make_supervised_data_module,
         rank0_print,
     )
 except ImportError:
-    from dataset import make_supervised_data_module, DataArguments, rank0_print, make_supervised_cvlmp_data_module
+    from dataset import make_supervised_data_module, DataArguments, rank0_print, make_supervised_prefmoe_data_module
 
 NAME_MEMORY_TRAIN_MODES = {
     "name_memory",
@@ -744,7 +744,7 @@ def train():
     ########################################################################################
     # data_module = make_supervised_data_module(tokenizer=tokenizer, data_args=data_args)
     data_args.name_memory_enable = bool(train_mode in NAME_MEMORY_TRAIN_MODES)
-    data_module = make_supervised_cvlmp_data_module(tokenizer=tokenizer, data_args=data_args)
+    data_module = make_supervised_prefmoe_data_module(tokenizer=tokenizer, data_args=data_args)
     if train_mode in NAME_MEMORY_TRAIN_MODES:
         model = LlavaLlamaNameMemoryWrapper(
             model,

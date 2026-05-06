@@ -7,7 +7,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from llava.eval.CVLMP.eval_demo.metrics import score_prediction
+from llava.eval.prefmoe.eval_demo.metrics import score_prediction
 from llava.eval.prefmllm import compute_preference_collapse
 from llava.model.prefmllm import (
     PREFMLLM_FACTORS,

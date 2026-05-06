@@ -15,8 +15,8 @@ and task-specific adaptation paths.
 - `llava/model/memory/`: factorized user-state memory, preference residuals,
   pseudo-user counterfactual bank, and hierarchical MoE adapters.
 - `PrefMoE/`: PrefMLLM's publication-facing MoE/LoRA adapter package.
-- `llava/train/train_cvlmp.py`: main training entry; use `--train_mode prefmllm`.
-- `llava/eval/CVLMP/eval_demo/eval_cvlmp_bridge_2.py`: 0-turn and 10-turn eval.
+- `llava/train/train_prefmoe.py`: main training entry; use `--train_mode prefmllm`.
+- `llava/eval/prefmoe/eval_demo/eval_prefmoe_bridge_2.py`: 0-turn and 10-turn eval.
 - `llava/eval/prefmllm/collapse_metrics.py`: FPout preference-collapse metric.
 - `configs/prefmllm_default.json`: default paper-aligned configuration.
 - `data/mmpb_clean/`: 200-row incomplete MMPB clean subset, split file,

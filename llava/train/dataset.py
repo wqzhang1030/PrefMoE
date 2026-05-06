@@ -1089,7 +1089,7 @@ class DataCollatorForSupervisedDataset(object):
         return batch
 
 
-def make_supervised_cvlmp_data_module(tokenizer: transformers.PreTrainedTokenizer,
+def make_supervised_prefmoe_data_module(tokenizer: transformers.PreTrainedTokenizer,
                                 data_args) -> Dict:
     """Make dataset and collator for supervised fine-tuning."""
     train_dataset = LazySupervisedConceptINCRDataset(
