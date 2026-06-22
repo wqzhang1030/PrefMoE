@@ -1,4 +1,8 @@
-# Group Preference Collapse in Personalized Multimodal Large Language Models
+<p align="center">
+  <a href="https://prefmoe.github.io/">
+    <img src="https://readme-typing-svg.demolab.com?font=Google+Sans&weight=700&size=26&duration=3600&pause=900&color=2F80ED&center=true&vCenter=true&width=1050&height=70&lines=Group+Preference+Collapse+in+Personalized+Multimodal+Large+Language+Models;PrefMoE%3A+Preference-Centric+Personalized+MLLMs" alt="Group Preference Collapse in Personalized Multimodal Large Language Models">
+  </a>
+</p>
 
 <p align="center">
   <strong>Fan Lyu, Wenqi Zhang, Joost van de Weijer</strong><br>
@@ -8,7 +12,7 @@
 <p align="center">
   <a href="#"><img alt="Paper" src="https://img.shields.io/badge/Paper-PDF-b31b1b?style=for-the-badge&logo=adobeacrobatreader&logoColor=white"></a>
   <a href="#"><img alt="arXiv" src="https://img.shields.io/badge/arXiv-Preprint-b31b1b?style=for-the-badge&logo=arxiv&logoColor=white"></a>
-  <a href="https://wqzhang1030.github.io/prefermoe.github.io/"><img alt="Page" src="https://img.shields.io/badge/Page-Project%20Page-2f80ed?style=for-the-badge&logo=githubpages&logoColor=white"></a>
+  <a href="https://prefmoe.github.io/"><img alt="Page" src="https://img.shields.io/badge/Page-Project%20Page-2f80ed?style=for-the-badge&logo=githubpages&logoColor=white"></a>
   <a href="https://huggingface.co/datasets/12123bskbc/MMPB-clean"><img alt="Data" src="https://img.shields.io/badge/Data-Dataset-6f42c1?style=for-the-badge&logo=databricks&logoColor=white"></a>
 </p>
 
